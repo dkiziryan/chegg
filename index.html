@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+      <title>Chegg Tutors Engineering</title>
+      <link rel="icon" type="image/x-icon" href="images/chegg-favicon.ico" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+      <script type="text/javascript" src='checkavailability.js'></script>
+      <script src="http://chancejs.com/chance.min.js"></script>
+  
+
+   </head>
+   <body>
+      <div id="chg-balloon-logo-container">
+         <img src="images/logo.png" />
+      </div>
+      <div id="chg-balloon-controls-container">
+         <p>Enter a username to get started!</p>
+         <input id="chg-balloon-input" maxlength="50" placeholder="e.g. BalloonMaster99"
+            name="chg-balloon-input"  type="text" value="" list='autoCompleteList'/>
+         <button id="chg-balloon-submit" >Check availability</button>
+         <br>
+         <div id="showimage"><img src="images/loading.gif" alt=""></div>
+         <div id='error' class='error'></div>
+      </div>
+      <br>
+      <div class="divider"></div>
+      <div class="successContainer">
+         <span id="successImage"><img src="images/check.png"></span>
+         <div id='success' class='success'></div>
+      </div>
+      <div class="optionContainer">
+         <span id="showNA"><img src="images/not-available.png"></span>
+         <div id="notavailable"></div>
+         <div id='options'></div>
+      </div>
+      <br>
+   </body>
+</html>
