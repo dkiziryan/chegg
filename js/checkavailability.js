@@ -27,7 +27,7 @@ function getSuggestions() {
     var input = $("#chg-balloon-input").val();
     var suggestionArray = [];
 
-    while (suggestionArray.length < 3) {
+    while (suggestionArray.length < 6) {
         suggestionArray.push(input+chance.last());
     }
 
@@ -41,6 +41,8 @@ function getSuggestions() {
 Function that filters the results by eliminating usernames that are taken.
 */
 function filterSuggestions(input, data) {
+
+    document.getElementById('options').innerHTML = "";
 
     Array1 = input.split(',');
     Array2 = [];
@@ -100,6 +102,7 @@ Document ready function that verifies input (via regex)
 is alphanumeric with hyphens, dashes and spaces. 
 */
 $(document).ready(function() {
+    $("#chg-balloon-input").val('');
     $("#chg-balloon-submit").click(function() {
         $("#showNA").hide();
         $("#successImage").hide();
