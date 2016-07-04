@@ -5,7 +5,7 @@ http://randomword.setgetgo.com/
 function getPromise(string) {
     console.log('in promise');
     var deferredObject = $.Deferred();
-    var url = 'http://chegg-tutors.appspot.com/coding-challenge/api/user/?username=' + string;
+    var url = 'https://chegg-tutors.appspot.com/coding-challenge/api/user/?username=' + string;
     var promise =
         $.ajax({
             type: 'GET',
