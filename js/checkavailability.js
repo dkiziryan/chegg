@@ -78,7 +78,7 @@ function verifyUsernameAvailability(input) {
                 $("#successImage").show();
                 document.getElementById('success').innerHTML = "Congrats! " + input + " is available";
             } else if (data && data.length != 0) {
-
+                document.getElementById('success').innerHTML ="";
                 if (data.length == 1 || data.length % 2 == 0 || data.length == 29) {
                     suggestions = getSuggestions();
                     verifyUsernameAvailability(suggestions.toString());
