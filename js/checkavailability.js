@@ -1,8 +1,7 @@
 /*
-Promise to get data from url and return.
+Promise to get data from url and return values.
 */
 function getPromise(string) {
-    console.log('in promise');
     var deferredObject = $.Deferred();
     var url = 'https://chegg-tutors.appspot.com/coding-challenge/api/user/?username=' + string;
     var promise =
@@ -20,7 +19,8 @@ function getPromise(string) {
 Function that gets suggestions for new name.
 Used a library called chance.js to generate random last names.
 Used Math.random to generate 4 digits.
-Generates 30 suggestions so that we call url only once to provide suggestions.
+Appended last names and digits to a suggested user name array.
+Generated 30 suggestions so that we call url only once to provide suggestions.
 */
 
 function getSuggestions() {
@@ -38,7 +38,7 @@ function getSuggestions() {
 }
 
 /*
-Function that filters the results by eliminating usernames that are taken.
+Function that filters the results by eliminating usernames that are not available.
 */
 function filterSuggestions(input, data) {
 
@@ -69,7 +69,6 @@ with 30 randomly generated user names.
 function verifyUsernameAvailability(input) {
     $("#showLoader").show();
     document.getElementById('error').innerHTML = "";
-    var array = [];
     var suggestions = '';
     if (input) {
         var promise = getPromise(input);
@@ -80,9 +79,8 @@ function verifyUsernameAvailability(input) {
                 document.getElementById('success').innerHTML = "Congrats! " + input + " is available";
             } else if (data && data.length != 0) {
 
-                if (data.length == 1 || data.length % 2 == 0) {
+                if (data.length == 1 || data.length % 2 == 0 || data.length == 29) {
                     suggestions = getSuggestions();
-                    console.log((data.length % 2 == 0), '???');
                     verifyUsernameAvailability(suggestions.toString());
                 } else {
                     filterSuggestions(input, data);
