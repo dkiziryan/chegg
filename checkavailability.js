@@ -17,16 +17,16 @@ function getPromise(string) {
         });
     return deferredObject;
 }
-
-
+/*
+Function that gets suggestions for new name.
+Used a library called chance.js to generate random last names.
+Used Math.random to generate 4 digits.
+*/
 
 function getSuggestions() {
     var input = $("#chg-balloon-input").val();
     var suggestionArray = [];
 
-
-    
-    
     while (suggestionArray.length < 15) {
         suggestionArray.push(input+chance.last());
     }
@@ -37,16 +37,16 @@ function getSuggestions() {
     return suggestionArray;
 }
 
+/*
+Function that filters the results by eliminating usernames that are taken.
+*/
 function filterSuggestions(input, data) {
-
-    console.log('input', input.split(','), input.split(',').length);
-    console.log('data', data, data.length);
 
     Array1 = input.split(',');
     Array2 = [];
     data.forEach(function(info) {
         Array2.push(info.username);
-    })
+    });
 
     Array1 = Array1.filter(function(val) {
         return Array2.indexOf(val) == -1;
@@ -56,13 +56,14 @@ function filterSuggestions(input, data) {
 
     for (var i = 0; i < 3; i++) {
         document.getElementById('options').innerHTML += Array1[i] + "<div class='divider'></div><br>";
+        document.getElementById('options').innerHTML += Array1[Array1.length -1] + "<div class='divider'></div><br>";
     }
 
 }
 
 /*
-Function which handles the promise, checks the string input and outputs to datalist.
-Using regex to make sure we are only sending letters lower/upper case.
+Function which handles the promise. If the name was taken we call the same function recursively
+with 30 randomly generated user names. 
 */
 function getAutoCompleteValues(input) {
     $("#showimage").show();
@@ -72,13 +73,11 @@ function getAutoCompleteValues(input) {
     if (input) {
         var promise = getPromise(input);
         promise.then(function(data) {
-            console.log(data, data.length);
             if (data && data.length == 0) {
                 $("#showimage").hide();
                 $("#successImage").show();
                 document.getElementById('success').innerHTML = "Congrats! " + input + " is available";
             } else if (data && data.length != 0) {
-                console.log('in else?', data);
 
                 if (data.length == 1 || data.length % 2 == 0) {
                     suggestions = getSuggestions();
@@ -98,14 +97,17 @@ function getAutoCompleteValues(input) {
         document.getElementById('error').innerHTML = "Invalid input";
     }
 }
-
+/*
+Document ready function that verifies input (via regex) 
+is alphanumeric with hyphens, dashes and spaces.
+*/
 $(document).ready(function() {
-
-
     $("#chg-balloon-submit").click(function() {
-        var checkString = /^[a-zA-Z\d\-_\s]+$/.test($("#chg-balloon-input").val());
+        var inputValue = $("#chg-balloon-input").val();
+
+        var checkString = /^[a-zA-Z\d\-_][a-zA-Z\d\-_\s]+$/.test(inputValue);
         if (checkString) {
-            getAutoCompleteValues($("#chg-balloon-input").val());
+            getAutoCompleteValues(inputValue);
         } else {
             document.getElementById('error').innerHTML = "Invalid input";
         }
