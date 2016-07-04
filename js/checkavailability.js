@@ -79,7 +79,7 @@ function verifyUsernameAvailability(input) {
                 document.getElementById('success').innerHTML = "Congrats! " + input + " is available";
             } else if (data && data.length != 0) {
                 document.getElementById('success').innerHTML ="";
-                if (data.length == 1 || data.length % 2 == 0 || data.length > 27) {
+                if (data.length == 1 || data.length > 27) {
                     suggestions = getSuggestions();
                     verifyUsernameAvailability(suggestions.toString());
                 } else {
