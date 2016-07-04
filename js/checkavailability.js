@@ -44,20 +44,20 @@ function filterSuggestions(input, data) {
 
     document.getElementById('options').innerHTML = "";
 
-    Array1 = input.split(',');
-    Array2 = [];
+    suggestedUserNames = input.split(',');
+    unavailableUserNames = [];
     data.forEach(function(info) {
-        Array2.push(info.username);
+        unavailableUserNames.push(info.username);
     });
 
-    Array1 = Array1.filter(function(val) {
-        return Array2.indexOf(val) == -1;
+    suggestedUserNames = suggestedUserNames.filter(function(val) {
+        return unavailableUserNames.indexOf(val) == -1;
     });
     $("#showNA").show();
     document.getElementById('notavailable').innerHTML = $("#chg-balloon-input").val() + " is not available. How about one of these: "
 
     for (var i = 0; i < 3; i++) {
-        document.getElementById('options').innerHTML += Array1[i] + "<div class='divider'></div><br>";
+        document.getElementById('options').innerHTML += suggestedUserNames[i] + "<div class='divider'></div><br>";
     }
 
 }
